@@ -1,6 +1,7 @@
 numpy
-torch
-torchvision
-torchbiomed
 setproctitle
 graphviz
+SimpleITK
+matplotlib
+pillow
+scikit-image
