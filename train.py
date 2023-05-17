@@ -316,6 +316,9 @@ def main(params, args):
         if args.precision == "bfloat16":
             with torch.cpu.amp.autocast(enabled=True, dtype=torch.bfloat16):
                 inference(params, args, inferLoader, model)
+        elif args.precision == "float16":
+            with torch.cpu.amp.autocast(enabled=True, dtype=torch.half):
+                inference(params, args, inferLoader, model)
         else:
             inference(params, args, inferLoader, model)
 
