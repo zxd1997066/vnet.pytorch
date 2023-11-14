@@ -72,6 +72,8 @@ def inference(params, args, loader, model):
     total_time = 0
     total_samples = 0
     batch_time_list = []
+    if args.compile:
+        model = torch.compile(model, backend=args.backend, options={"freezing": True})    
     if args.ipex:
         import intel_extension_for_pytorch as ipex
 
