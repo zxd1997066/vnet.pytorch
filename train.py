@@ -316,10 +316,10 @@ def main(params, args):
                                        GT=None, transform=testTransform)
         inferLoader = DataLoader(inferSet, batch_size=batch_size, shuffle=True, **kwargs)
         if args.precision == "bfloat16":
-            with torch.cpu.amp.autocast(enabled=True, dtype=torch.bfloat16):
+            with torch.autocast(device_type="cuda" if torch.cuda.is_available() else "cpu", enabled=True, dtype=torch.bfloat16):
                 inference(params, args, inferLoader, model)
         elif args.precision == "float16":
-            with torch.cpu.amp.autocast(enabled=True, dtype=torch.half):
+            with torch.autocast(device_type="cuda" if torch.cuda.is_available() else "cpu", enabled=True, dtype=torch.half):
                 inference(params, args, inferLoader, model)
         else:
             inference(params, args, inferLoader, model)
