@@ -72,6 +72,10 @@ def inference(params, args, loader, model):
     total_time = 0
     total_samples = 0
     batch_time_list = []
+    if args.triton_cpu:
+        print("run with triton cpu backend")
+        import torch._inductor.config
+        torch._inductor.config.cpu_backend="triton"
     if args.compile:
         model = torch.compile(model, backend=args.backend, options={"freezing": True})    
     if args.ipex:
