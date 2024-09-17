@@ -191,6 +191,7 @@ def main(params, args):
     nll = False
     weight_decay = args.weight_decay
     setproctitle.setproctitle(resultDir)
+    import torch
     if args.triton_cpu:
         print("run with triton cpu backend")
         import torch._inductor.config
